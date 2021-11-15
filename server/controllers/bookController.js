@@ -59,4 +59,4 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(500).json(err))
   }
-}
+};
