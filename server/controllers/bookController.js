@@ -16,7 +16,7 @@ module.exports = {
   findAll: function (req, res) {
     console.log("from bookController findAll");
     db.Book
-      .find({})
+      .find(req.query)
       .sort({ title: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(500).json(err))
@@ -27,6 +27,25 @@ module.exports = {
     console.log("from bookController findByTitleAndAuthor", req.params);
     db.Book
       .findOne({ title: req.params.title, author: req.params.author })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(500).json(err))
+  },
+
+  // FIND ONE book by ID
+  findById: function(req,res) {
+    console.log("from bookController findById", req.params);
+    db.Book
+    .findById(req.params.id)
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(500).json(err))
+  },
+
+
+  // UPDATE ONE book by ID
+  updateBook: function(req,res) {
+    console.log("from bookController updateBook", req.params);
+    db.Book
+      .findOneAndUpdate({ id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(500).json(err))
   },
