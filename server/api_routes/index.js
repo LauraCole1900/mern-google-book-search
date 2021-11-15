@@ -7,7 +7,7 @@ const apiUser = require("./userRoutes");
 // API Routes
 router.use("/api/book", apiBook);
 router.use("/api/google", apiGoogle);
-router.use("/api/user", apiUser);
+// router.use("/api/user", apiUser);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {

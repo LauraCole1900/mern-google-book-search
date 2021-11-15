@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navigation } from "./components/navbar";
+import Navigation from "./components/nav";
 import "./App.css";
 
 
@@ -13,7 +13,7 @@ function App() {
         </header>
         <main>
           <Routes>
-            
+
           </Routes>
         </main>
       </Router>
