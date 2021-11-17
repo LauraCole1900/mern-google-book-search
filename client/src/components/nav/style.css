@@ -1,15 +1,21 @@
 :root {
   --red: #ff0000;
+  --googleRed: #ea4335;
+  --googleYellow: #fbbc05;
+  --googleGreen: #2da94f;
+  --googleBlue: #4285f4;
+  --googleGradient: linear-gradient(to right, var(--googleRed), var(--googleYellow), var(--googleGreen), var(--googleBlue));
 }
 
 .navbar {
+  background: var(--googleGradient);
   width: 100%;
   height: 100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  border: 1px solid var(--red);
+  /* border: 1px solid var(--red); */
 }
 
 .navobj {
