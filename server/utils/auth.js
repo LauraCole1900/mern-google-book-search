@@ -1,7 +1,8 @@
-const jwt = require('jsonwebtoken');
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
-const secret = 'mysecretssshhhhhhh';
-const expiration = '1h';
+const secret = process.env.JWT_SECRET;
+const expiration = "1h";
 
 module.exports = {
   signToken: function ({ email, userName, _id }) {
