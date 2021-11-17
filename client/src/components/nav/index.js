@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Navbar, Nav, Image } from "react-bootstrap";
+import { Container, Navbar, Nav, Image } from "react-bootstrap";
 import { UserAPI } from "../../utils/api";
 import "./style.css";
 
@@ -22,24 +22,24 @@ const Navigation = () => {
   //   } else {
   //     setPageReady(true);
   //   }
-    
+
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [])
 
   return (
     <>
       {/* {pageReady === true && */}
-        <Navbar expand="sm" className="navbar">
-          <Navbar.Brand className="logo ml-3">
-            <div>
-              {/* <Image fluid src="/images/bristlecone-light.png" alt="BCMS logo" className="pineTree mylogo" /> */}
-              <Link to="/conferences" className={navigate.pathname === "/conferences" ? "mylogo active" : "mylogo"}>
-                Search Google Books!
-              </Link>
-            </div>
-          </Navbar.Brand>
-          <Navbar.Text className="hello">
-            Welcome,
+      <Navbar expand="sm" className="navbar">
+        <Navbar.Brand className="logo ml-3">
+          <div>
+            {/* <Image fluid src="/images/bristlecone-light.png" alt="BCMS logo" className="pineTree mylogo" /> */}
+            <Nav.Link href="/#">
+              Search Google Books!
+            </Nav.Link>
+          </div>
+        </Navbar.Brand>
+        <Navbar.Text className="hello">
+          Welcome,
           {/* {isAuthenticated
               ? <Link to="/profile" className={navigate.pathname === "/profile" ? "navlink active" : "navlink"}>
                 {userInfo.given_name}!
@@ -48,18 +48,18 @@ const Navigation = () => {
                 Guest!
                 </Link>
             } */}
-          </Navbar.Text>
-          <Nav className="navobj">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" />
-            <Navbar.Collapse id="basic-navbar-nav" className="navobject">
-              {/* {isAuthenticated &&
-                <Link to="/my_books" className={navigate.pathname === "/my_books" ? "navlink placelink active" : "navlink placelink"}>
+        </Navbar.Text>
+        <Nav className="navobj">
+          {/* <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" /> */}
+          <Navbar.Collapse id="basic-navbar-nav" className="navobject">
+            {/* {isAuthenticated &&
+                <Nav.Link href="/my_books">
                   My Books
-                </Link>} */}
-              <Link to="/search" className={navigate.pathname === "/search" ? "navlink placelink active" : "navlink placelink"}>
-                Search Books
-              </Link>
-              {/* {isAuthenticated
+                </Nav.Link>} */}
+            <Nav.Link href="/search">
+              Search Books
+            </Nav.Link>
+            {/* {isAuthenticated
                 ? <Link to={window.location.origin} className="navlink auth" onClick={() => logout({ returnTo: window.location.origin })}>
                   Logout
                   </Link>
@@ -67,9 +67,9 @@ const Navigation = () => {
                   Log In
                   </Link>
               } */}
-            </Navbar.Collapse>
-          </Nav>
-        </Navbar>
+          </Navbar.Collapse>
+        </Nav>
+      </Navbar>
       {/* } */}
     </>
   )
