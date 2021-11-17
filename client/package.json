@@ -1,6 +1,7 @@
 {
-  "name": "mern-google-books",
+  "name": "client",
   "version": "0.1.0",
+  "description": "mern-google-books client side",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
