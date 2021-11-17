@@ -1,0 +1,36 @@
+:root {
+  --red: #ff0000;
+  --googleRed: #ea4335;
+  --googleYellow: #fbbc05;
+  --googleGreen: #2da94f;
+  --googleBlue: #4285f4;
+  --headerFont: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--headerFont);
+}
+
+.gRed {
+  color: var(--googleRed);
+}
+
+.gYellow {
+  color: var(--googleYellow);
+}
+
+.gGreen {
+  color: var(--googleGreen);
+}
+
+.gBlue {
+  color: var(--googleBlue);
+}
+
+.red {
+  color: var(--red);
+}
+
+.gButton {
+  background-color: var(--googleBlue);
+}

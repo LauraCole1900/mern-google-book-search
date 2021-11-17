@@ -4,10 +4,10 @@ const db = require("../models");
 module.exports = {
   // FIND ALL books defined in the query
   findAll: function (req, res) {
-    console.log("from googleController findAll", req);
+    console.log("from googleController findAll", req.query);
     const { query: params } = req;
     axios
-      .get("https://www.googleapis.com/books/v1/volumes", {
+      .get("https://www.googleapis.com/books/v1/volumes?q=", {
         params
       })
       .then(results =>
