@@ -25,11 +25,6 @@ const SearchPage = () => {
         </Row>
         {searchedBook &&
           searchedBook.map((thisBook) => (
-            // bookId: thisBook.id,
-            // authors: thisBook.volumeInfo.authors || ['No author to display'],
-            // title: thisBook.volumeInfo.title,
-            // description: thisBook.volumeInfo.description,
-            // image: thisBook.volumeInfo.imageLinks?.thumbnail || '',
             <Row key={thisBook.id} >
               <Col sm={12}>
                 <BookCard thisBook={thisBook} />

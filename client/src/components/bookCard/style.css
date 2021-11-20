@@ -1,5 +1,6 @@
 :root {
   --red: #ff0000;
+  --charcoal: #333333;
   --googleRed: #ea4335;
   --googleYellow: #fbbc05;
   --googleGreen: #2da94f;
@@ -8,6 +9,15 @@
   --headerFont: 'Inter', sans-serif;
 }
 
-.book-title {
-  background-color: var(--googleGradient);
+.bookCard {
+  margin: 0.5rem 0;
+  border: 1px solid var(--charcoal);
+}
+
+img {
+  border: 3px solid var(--charcoal);
+}
+
+.bookTitle {
+  background: var(--googleGradient);
 }
