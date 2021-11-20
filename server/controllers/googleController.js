@@ -9,7 +9,7 @@ module.exports = {
     axios
       .get("https://www.googleapis.com/books/v1/volumes?q=", {
         params
-      })
+      }, "&key=")
       .then(results =>
         // Make sure all results contain title, author, description, link, and image
         results.data.items.filter(

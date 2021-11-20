@@ -5,11 +5,11 @@ import { BookAPI, GoogleAPI, UserAPI } from "../../utils/api";
 // import { commValidate } from "../../utils/validation";
 import "./style.css";
 
-const SearchForm = (props) => {
-  const [book, setBook] = useState({
-    title: "",
-    authors: [""]
-  });
+const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
+  // const [book, setBook] = useState({
+  //   title: "",
+  //   authors: [""]
+  // });
   const [errors, setErrors] = useState([]);
 
   // Grabs conference ID from URL
@@ -21,10 +21,6 @@ const SearchForm = (props) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setBook({ ...book, [name]: value });
-    if (name === "authors") {
-      let authorNames = value.split(",");
-      setBook({ ...book, authors: authorNames });
-    }
   };
 
   // Handles button click & checks if submitted book is already in the db
@@ -40,7 +36,7 @@ const SearchForm = (props) => {
   // }
 
   // Submits information for new committee member
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log("Book submit", book)
     // const validationErrors = commValidate(props.member);
@@ -48,13 +44,17 @@ const SearchForm = (props) => {
     // setErrors(validationErrors);
     // switch (noErrors) {
     //   case true:
-    // POST call to create book document
-    GoogleAPI.getAllBooks({ ...book })
-      .then(resp => {
+    // FETCH call to search the API
+    await GoogleAPI.searchBooks(book.title)
+      .then(res => {
         // If no errors thrown, show Success modal
-        if (!resp.err) {
-          console.log(resp);
-          // handleShowSuccess();
+        if (!res.err) {
+          res.json()
+            .then(res => {
+              console.log(res.items);
+              setSearchedBook(res.items);
+              // handleShowSuccess();
+            })
         }
       })
       .catch(err => {
@@ -123,7 +123,7 @@ const SearchForm = (props) => {
 
                   <Form.Group>
                     <Row>
-                      <Col sm={6}>
+                      <Col sm={12}>
                         <Form.Label>Title: <span className="red">*</span></Form.Label><br />
                         {/* {errors.commGivenName &&
                           <div className="error"><p>{errors.commGivenName}</p></div>} */}
@@ -133,20 +133,6 @@ const SearchForm = (props) => {
                           name="title"
                           placeholder="War and Peace"
                           value={book?.title}
-                          className="formInput"
-                          onChange={handleInputChange}
-                        />
-                      </Col>
-                      <Col sm={6}>
-                        <Form.Label>Author:</Form.Label><br />
-                        {/* {errors.commFamilyName &&
-                          <div className="error"><p>{errors.commFamilyName}</p></div>} */}
-                        <Form.Control
-                          type="input"
-                          id="formAuthor"
-                          name="authors"
-                          placeholder="Leo Tolstoy"
-                          value={book?.authors}
                           className="formInput"
                           onChange={handleInputChange}
                         />

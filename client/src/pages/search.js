@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import BookCard from "../components/bookCard";
 import SearchForm from "../components/searchForm";
 
 const SearchPage = () => {
+  const [book, setBook] = useState({
+    title: "",
+    authors: [""]
+  });
+  const [searchedBook, setSearchedBook] = useState();
 
   return (
     <>
@@ -14,9 +20,22 @@ const SearchPage = () => {
         </Row>
         <Row>
           <Col sm={12}>
-            <SearchForm />
+            <SearchForm book={book} setBook={setBook} setSearchedBook={setSearchedBook} />
           </Col>
         </Row>
+        {searchedBook &&
+          searchedBook.map((thisBook) => (
+            // bookId: thisBook.id,
+            // authors: thisBook.volumeInfo.authors || ['No author to display'],
+            // title: thisBook.volumeInfo.title,
+            // description: thisBook.volumeInfo.description,
+            // image: thisBook.volumeInfo.imageLinks?.thumbnail || '',
+            <Row key={thisBook.id} >
+              <Col sm={12}>
+                <BookCard thisBook={thisBook} />
+              </Col>
+            </Row>
+          ))}
       </Container>
     </>
   )
