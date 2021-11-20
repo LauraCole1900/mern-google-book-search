@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Container, Form, Row, Col, Button, Card, Image } from "react-bootstrap";
+import { Container, Form, Row, Col, Button, Card } from "react-bootstrap";
 import { BookAPI, GoogleAPI, UserAPI } from "../../utils/api";
 // import { commValidate } from "../../utils/validation";
 import "./style.css";
 
 const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
-  // const [book, setBook] = useState({
-  //   title: "",
-  //   authors: [""]
-  // });
   const [errors, setErrors] = useState([]);
 
   // Grabs conference ID from URL
@@ -51,12 +47,23 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
         if (!res.err) {
           res.json()
             .then(res => {
-              console.log(res.items);
-              setSearchedBook(res.items);
+              const filteredBooks =
+                res.items.filter(book =>
+                  book.volumeInfo.title &&
+                  book.volumeInfo.authors &&
+                  book.volumeInfo.description &&
+                  book.volumeInfo.previewLink &&
+                  book.volumeInfo.imageLinks &&
+                  book.volumeInfo.imageLinks.thumbnail
+                )
+              console.log(filteredBooks);
+              setSearchedBook(filteredBooks);
               // handleShowSuccess();
             })
         }
       })
+      //   }
+      // })
       .catch(err => {
         console.log(err)
         // setErrThrown(err.message);

@@ -30,16 +30,8 @@ const Navigation = () => {
     <>
       {/* {pageReady === true && */}
       <Navbar expand="sm" className="navbar">
-        <Navbar.Brand className="logo ml-3">
-          <div>
-            {/* <Image fluid src="/images/bristlecone-light.png" alt="BCMS logo" className="pineTree mylogo" /> */}
-            <Nav.Link href="/#">
-              Search Google Books!
-            </Nav.Link>
-          </div>
-        </Navbar.Brand>
         <Navbar.Text className="hello">
-          Welcome,
+          Welcome, Guest!
           {/* {isAuthenticated
               ? <Link to="/profile" className={navigate.pathname === "/profile" ? "navlink active" : "navlink"}>
                 {userInfo.given_name}!
