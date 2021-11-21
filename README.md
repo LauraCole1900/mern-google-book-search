@@ -71,7 +71,7 @@ npm run test
 
 ## Credits
 
-N/A
+Authentication code developed and provided by 2U/Trilogy Education Services
 
 ## Contributing
 
