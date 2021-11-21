@@ -16,7 +16,7 @@ const BookCard = ({ thisBook }) => {
               <h1>{thisBook.volumeInfo.title}</h1>
               {thisBook?.volumeInfo?.authors &&
                 <p>by {thisBook.volumeInfo.authors.join("; ")}</p>}
-              <p>Click <a href={thisBook.volumeInfo.previewLink}>here</a> for more information</p>
+              <p>Click <a href={thisBook.volumeInfo.previewLink} target="_blank" rel="noreferrer">here</a> for more information</p>
             </Col>
           </Row>
         </Card.Header>
