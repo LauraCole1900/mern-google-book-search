@@ -147,6 +147,20 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
                     </Row>
                   </Form.Group>
 
+                  <Row>
+                    <Col sm={9}></Col>
+                    <Col sm={3}>
+                      <Button
+                        data-toggle="popover"
+                        title="Search"
+                        className="button gButton"
+                        data-btnname="searchBook"
+                        onClick={handleFormSubmit}
+                        type="button"
+                      >Search Books</Button>
+                    </Col>
+                  </Row>
+
                 </Card.Body>
               </Card>
             </Col>
@@ -158,19 +172,6 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
                 <div className="error"><p>The nanobots have detected an error or omission in one or more required fields. Please review this form.</p></div>
               </Col>
             </Row>} */}
-
-          <Row>
-            <Col sm={2}>
-              <Button
-                data-toggle="popover"
-                title="Search"
-                className="button gButton"
-                data-btnname="searchBook"
-                onClick={handleFormSubmit}
-                type="button"
-              >Search Books</Button>
-            </Col>
-          </Row>
 
         </Form>
 

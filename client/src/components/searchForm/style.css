@@ -33,4 +33,5 @@ body {
 
 .gButton {
   background-color: var(--googleBlue);
+  margin-top: 1rem;
 }
