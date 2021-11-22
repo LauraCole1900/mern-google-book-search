@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, Col, Image, Row } from "react-bootstrap";
+import { Button, Card, Col, Image, Row } from "react-bootstrap";
+import Auth from '../../utils/auth';
 import "./style.css";
 
 const BookCard = ({ thisBook }) => {
@@ -12,12 +13,21 @@ const BookCard = ({ thisBook }) => {
             <Col sm={3}>
               <Image src={thisBook.volumeInfo.imageLinks?.thumbnail || ''} />
             </Col>
-            <Col sm={9}>
+            <Col sm={8}>
               <h1>{thisBook.volumeInfo.title}</h1>
               {thisBook?.volumeInfo?.authors &&
                 <p>by {thisBook.volumeInfo.authors.join("; ")}</p>}
               <p>Click <a href={thisBook.volumeInfo.previewLink} target="_blank" rel="noreferrer">here</a> for more information</p>
             </Col>
+            {Auth.loggedIn() &&
+              <Button
+                data-toggle="popover"
+                title="Save Book"
+                className="button gButton"
+                data-btnname="saveBook"
+                // onClick={saveBook}
+                type="button"
+              >Save Book</Button>}
           </Row>
         </Card.Header>
         <Card.Body>
