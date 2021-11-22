@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navigation from "./components/nav";
-import { LoginPage, SavedPage, SearchPage, SignupPage } from "./pages"
+import { LoginPage, NotFound, SavedPage, SearchPage, SignupPage } from "./pages"
 import "./App.css";
 
 
@@ -14,10 +14,11 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route exact path="/" element={<SearchPage />} />
-            <Route exact path="/my_books" element={<SavedPage />} />
-            <Route exact path="/login" element={<LoginPage />} />
-            <Route exact path="/signup" element={<SignupPage />} />
+            <Route path="/" element={<SearchPage />} />
+            <Route path="/my_books" element={<SavedPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </Router>
