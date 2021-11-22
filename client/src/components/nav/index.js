@@ -39,7 +39,7 @@ const Navigation = () => {
         <Navbar.Text className="hello">
           Welcome,&nbsp;
           {Auth.loggedIn()
-            ? <Link to="/profile" className="navlink">
+            ? <Link to="/my_books" className="navlink">
               {userInfo.given_name}!
             </Link>
             : <Link to="/login" className="navlink">
@@ -54,7 +54,7 @@ const Navigation = () => {
               <Link to="/my_books" className="navlink">
                 My Books
               </Link>}
-            <Link to="/search" className="navlink">
+            <Link to="/" className="navlink">
               Search Books
             </Link>
             {Auth.loggedIn()
