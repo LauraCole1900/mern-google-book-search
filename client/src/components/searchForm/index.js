@@ -1,16 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { Container, Form, Row, Col, Button, Card } from "react-bootstrap";
-import { BookAPI, GoogleAPI, UserAPI } from "../../utils/api";
-// import { commValidate } from "../../utils/validation";
+import { GoogleAPI } from "../../utils/api";
 import "./style.css";
 
 const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
-
-  // Grabs conference ID from URL
-  // const urlArray = window.location.href.split("/")
-  // const confId = urlArray[urlArray.length - 1]
-  // const formType = urlArray[urlArray.length - 2];
 
   // Handles input changes to form fields
   const handleInputChange = (e) => {
@@ -18,19 +11,7 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
     setBook({ ...book, [name]: value });
   };
 
-  // Handles button click & checks if submitted book is already in the db
-  // Probably better to handle this on the back end
-  // const handleButtonClick = (e) => {
-  //   const bookCheck = props.committee.find(book => book.title === props.member.commEmail)
-  //   console.log({ bookCheck })
-  //   if (bookCheck === undefined) {
-  //     handleFormSubmit(e)
-  //   } else {
-  //     handleFormUpdate(e);
-  //   }
-  // }
-
-  // Submits information for new committee member
+  // Submits book information
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,51 +42,9 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
     setBook("");
   }
 
-  const handleFormUpdate = (e) => {
-    e.preventDefault();
-    console.log("Book update", book);
-    // const validationErrors = commValidate(props.member);
-    // const noErrors = Object.keys(validationErrors).length === 0;
-    // setErrors(validationErrors);
-    // switch (noErrors) {
-    //   case true:
-    // PUT call to update member document
-    BookAPI.updateBookById(book._id, { ...book })
-      .then(res => {
-        // If no errors thrown, show Success modal
-        if (!res.err) {
-          console.log(res);
-          // handleShowSuccess();
-        }
-      })
-      // If yes errors thrown, setState(err.message) and show Error modal
-      .catch(err => {
-        console.log(err)
-        // setErrThrown(err.message);
-        // handleShowErr();
-      })
-    //     break;
-    //   default:
-    //     console.log({ errors })
-    // }
-  }
-
 
   return (
     <>
-      {/* {!isAuthenticated &&
-        <Row>
-          <h1 className="regRemind">Please <Link to={window.location.origin} className="login" onClick={() => loginWithRedirect()}>log in</Link> to add or edit committee members.</h1>
-          <div className="authLogo">
-            <Image
-              fluid="true"
-              className="loadLogo"
-              src="/images/bristlecone-dark.png"
-              alt="BCMS logo"
-            />
-          </div>
-        </Row>} */}
-
       <Container>
         <Form className="searchForm">
 
