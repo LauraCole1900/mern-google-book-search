@@ -1,5 +1,7 @@
 :root {
   --red: #ff0000;
+  --charcoal: #333333;
+  --darkBlue: #000088;
   --googleRed: #ea4335;
   --googleYellow: #fbbc05;
   --googleGreen: #2da94f;
@@ -21,8 +23,23 @@
 .navobj {
   width: 60%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   /* border: 1px solid red; */
+}
+
+.navobject {
+  display: flex;
+  justify-content: space-around;
+}
+
+.navlink {
+  color: var(--darkBlue);
+}
+.navlink:hover {
+  color: var(--googleBlue);
+}
+.navlink:visited {
+  color: var(--charcoal);
 }
 
 @media (max-width: 768px) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container, Navbar, Nav, Image } from "react-bootstrap";
 import { UserAPI } from "../../utils/api";
+import Auth from '../../utils/auth';
 import "./style.css";
 
 const Navigation = () => {
@@ -31,34 +32,34 @@ const Navigation = () => {
       {/* {pageReady === true && */}
       <Navbar expand="sm" className="navbar">
         <Navbar.Text className="hello">
-          Welcome, Guest!
-          {/* {isAuthenticated
-              ? <Link to="/profile" className={navigate.pathname === "/profile" ? "navlink active" : "navlink"}>
-                {userInfo.given_name}!
-                </Link>
-              : <Link to={window.location.origin} className="navlink guest" onClick={() => loginWithRedirect()}>
-                Guest!
-                </Link>
-            } */}
+          Welcome,&nbsp;
+          {Auth.loggedIn()
+            ? <Link to="/profile" className="navlink">
+              {userInfo.given_name}!
+            </Link>
+            : <Link to="/login" className="navlink">
+              Guest!
+            </Link>
+          }
         </Navbar.Text>
         <Nav className="navobj">
           {/* <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" /> */}
           <Navbar.Collapse id="basic-navbar-nav" className="navobject">
-            {/* {isAuthenticated &&
-                <Nav.Link href="/my_books">
-                  My Books
-                </Nav.Link>} */}
-            <Nav.Link href="/search">
+            {Auth.loggedIn() &&
+              <Link to="/my_books" className="navlink">
+                My Books
+              </Link>}
+            <Link to="/search" className="navlink">
               Search Books
-            </Nav.Link>
-            {/* {isAuthenticated
-                ? <Link to={window.location.origin} className="navlink auth" onClick={() => logout({ returnTo: window.location.origin })}>
-                  Logout
-                  </Link>
-                : <Link to={window.location.origin} className="navlink auth" onClick={() => loginWithRedirect()}>
-                  Log In
-                  </Link>
-              } */}
+            </Link>
+            {Auth.loggedIn()
+              ? <Link onClick={Auth.logout} className="navlink">
+                Logout
+              </Link>
+              : <Link to="/login" className="navlink">
+                Log In/Sign Up
+              </Link>
+            }
           </Navbar.Collapse>
         </Nav>
       </Navbar>
