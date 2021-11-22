@@ -5,8 +5,7 @@ import SearchForm from "../components/searchForm";
 
 const SearchPage = () => {
   const [book, setBook] = useState({
-    title: "",
-    authors: [""]
+    title: ""
   });
   const [searchedBook, setSearchedBook] = useState();
 

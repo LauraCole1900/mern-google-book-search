@@ -6,7 +6,6 @@ import { BookAPI, GoogleAPI, UserAPI } from "../../utils/api";
 import "./style.css";
 
 const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
-  const [errors, setErrors] = useState([]);
 
   // Grabs conference ID from URL
   // const urlArray = window.location.href.split("/")
@@ -34,16 +33,11 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
   // Submits information for new committee member
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("Book submit", book)
-    // const validationErrors = commValidate(props.member);
-    // const noErrors = Object.keys(validationErrors).length === 0;
-    // setErrors(validationErrors);
-    // switch (noErrors) {
-    //   case true:
+
     // FETCH call to search the API
     await GoogleAPI.searchBooks(book.title)
       .then(res => {
-        // If no errors thrown, show Success modal
+        // If no errors, json the result, then filter
         if (!res.err) {
           res.json()
             .then(res => {
@@ -58,21 +52,13 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
                 )
               console.log(filteredBooks);
               setSearchedBook(filteredBooks);
-              // handleShowSuccess();
             })
         }
       })
-      //   }
-      // })
       .catch(err => {
         console.log(err)
-        // setErrThrown(err.message);
-        // handleShowErr();
       })
-    //   break;
-    // default:
-    //   console.log({ errors });
-    // }
+    setBook("");
   }
 
   const handleFormUpdate = (e) => {
@@ -132,8 +118,6 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
                     <Row>
                       <Col sm={12}>
                         <Form.Label>Title: <span className="red">*</span></Form.Label><br />
-                        {/* {errors.commGivenName &&
-                          <div className="error"><p>{errors.commGivenName}</p></div>} */}
                         <Form.Control
                           type="input"
                           id="formTitle"
@@ -156,7 +140,7 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
                         className="button gButton"
                         data-btnname="searchBook"
                         onClick={handleFormSubmit}
-                        type="button"
+                        type="submit"
                       >Search Books</Button>
                     </Col>
                   </Row>
@@ -165,13 +149,6 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
               </Card>
             </Col>
           </Row>
-
-          {/* {Object.keys(errors).length > 0 &&
-            <Row>
-              <Col sm={12}>
-                <div className="error"><p>The nanobots have detected an error or omission in one or more required fields. Please review this form.</p></div>
-              </Col>
-            </Row>} */}
 
         </Form>
 

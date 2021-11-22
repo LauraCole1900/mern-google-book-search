@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Container, Navbar, Nav, Image } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
 import { UserAPI } from "../../utils/api";
 import Auth from '../../utils/auth';
 import "./style.css";
 
 const Navigation = () => {
-  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
-  const [pageReady, setPageReady] = useState(false);
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     UserAPI.getUserByEmail(user.email)
-  //       .then((resp) => {
-  //         console.log("from userInfo getUserByEmail", resp.data);
-  //         const userArr = resp.data;
-  //         setUserInfo(userArr);
-  //         setPageReady(true);
-  //       })
-  //       .catch((err) => console.log(err))
-  //   } else {
-  //     setPageReady(true);
-  //   }
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+        if (!token) {
+          return false;
+        }
+        const response = await UserAPI.getUser(token);
+
+        if (!response.ok) {
+          throw new Error('Something went wrong!');
+        }
+        const user = await response.json();
+        setUserInfo(user);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getUserInfo();
+  }, []);
 
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [])
 
   return (
     <>
-      {/* {pageReady === true && */}
       <Navbar expand="sm" className="navbar">
         <Navbar.Text className="hello">
           Welcome,&nbsp;
@@ -43,7 +48,7 @@ const Navigation = () => {
           }
         </Navbar.Text>
         <Nav className="navobj">
-          {/* <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" /> */}
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" />
           <Navbar.Collapse id="basic-navbar-nav" className="navobject">
             {Auth.loggedIn() &&
               <Link to="/my_books" className="navlink">
@@ -63,7 +68,6 @@ const Navigation = () => {
           </Navbar.Collapse>
         </Nav>
       </Navbar>
-      {/* } */}
     </>
   )
 }
