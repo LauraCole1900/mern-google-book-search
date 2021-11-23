@@ -8,7 +8,15 @@
   --headerFont: 'Inter', sans-serif;
 }
 
+.card-title {
+  padding: 1rem;
+}
+
 .center {
   text-align: center;
   margin: 1rem 0 0.5rem 0;
+}
+
+.smallText {
+  font-size: 16px;
 }

@@ -49,7 +49,7 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
         <Form className="searchForm">
 
           <Row>
-            <Col sm={10}>
+            <Col sm={12}>
               <Card className="formCard">
                 <Card.Body className="cardBody">
 
