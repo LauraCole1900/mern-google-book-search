@@ -32,14 +32,30 @@ module.exports = {
   },
 
 
-  // GET user by email
-  findByEmail: function (req, res) {
-    console.log("from userController findByEmail", req.params.email)
-    db.User
-      .findOne({ email: req.params.email })
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err))
+  // GET logged-in user
+  getThisUser: async function (req, res) {
+    console.log("from userController getThisUser", req.params)
+    const thisUser = db.User.findOne({
+      $or: [{ _id: req.user ? req.user._id : req.params.id }, { email: req.params.email }]
+    })
+    if (!thisUser) {
+      return res.status(400).json({ message: "User not found" })
+    }
+    res.json(thisUser);
   },
+
+  //   // get a single user by either their id or their username
+  //   async getSingleUser({ user = null, params }, res) {
+  //   const foundUser = await User.findOne({
+  //     $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+  //   });
+
+  //   if (!foundUser) {
+  //     return res.status(400).json({ message: 'Cannot find a user with this id!' });
+  //   }
+
+  //   res.json(foundUser);
+  // },
 
 
   // PUT user

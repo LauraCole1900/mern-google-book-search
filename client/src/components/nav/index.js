@@ -7,6 +7,7 @@ import "./style.css";
 
 const Navigation = () => {
   const [userInfo, setUserInfo] = useState({});
+  const [pageReady, setPageReady] = useState(false);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -18,9 +19,10 @@ const Navigation = () => {
         const response = await UserAPI.getMe(token);
 
         if (!response.ok) {
-          throw new Error('Something went wrong!');
+          throw new Error("Something went wrong");
         }
         const user = await response.json();
+        console.log(user);
         setUserInfo(user);
       } catch (err) {
         console.error(err);
@@ -28,44 +30,47 @@ const Navigation = () => {
     };
 
     getUserInfo();
+    setPageReady(true);
   }, []);
 
 
   return (
     <>
-      <Navbar expand="sm" className="navbar">
-        <Navbar.Text className="hello">
-          Welcome,&nbsp;
-          {Auth.loggedIn()
-            ? <Link to="/my_books" className="navlink">
-              {userInfo.given_name}!
-            </Link>
-            : <Link to="/login" className="navlink">
-              Guest!
-            </Link>
-          }
-        </Navbar.Text>
-        <Nav className="navobj">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" />
-          <Navbar.Collapse id="basic-navbar-nav" className="navobject">
-            {Auth.loggedIn() &&
-              <Link to="/my_books" className="navlink">
-                My Books
-              </Link>}
-            <Link to="/" className="navlink">
-              Search Books
-            </Link>
+      {pageReady === true &&
+        <Navbar expand="sm" className="navbar">
+          <Navbar.Text className="hello">
+            Welcome,&nbsp;
             {Auth.loggedIn()
-              ? <Link to="/" onClick={Auth.logout} className="navlink">
-                Logout
+              ? <Link to="/my_books" className="navlink">
+                {userInfo.userName}!
               </Link>
               : <Link to="/login" className="navlink">
-                Log In
+                Guest!
               </Link>
             }
-          </Navbar.Collapse>
-        </Nav>
-      </Navbar>
+          </Navbar.Text>
+          <Nav className="navobj">
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" />
+            <Navbar.Collapse id="basic-navbar-nav" className="navobject">
+              {Auth.loggedIn() &&
+                <Link to="/my_books" className="navlink">
+                  My Books
+                </Link>}
+              <Link to="/" className="navlink">
+                Search Books
+              </Link>
+              {Auth.loggedIn()
+                ? <Link to="/" onClick={Auth.logout} className="navlink">
+                  Logout
+                </Link>
+                : <Link to="/login" className="navlink">
+                  Log In
+                </Link>
+              }
+            </Navbar.Collapse>
+          </Nav>
+        </Navbar>
+      }
     </>
   )
 }

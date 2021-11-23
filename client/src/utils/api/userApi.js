@@ -16,10 +16,23 @@ const UserAPI = {
 
 
   // GET user by email
-  findUserByEmail: function (email) {
-    console.log("from API findUserByEmail", email);
-    return axios.get(`/api/user/${email}`)
+  getMe: function (token) {
+    console.log("from API getMe", token);
+    return axios.get("/api/user/me", {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
   },
+
+  // export const getMe = (token) => {
+  //   return fetch('/api/users/me', {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  // };
 
 
   // UPDATE user by email

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const userController = require("../controllers/userController.js");
+const { authMiddleware } = require('../utils/auth');
 
 // stem "/api/user"
 router.route("/post")
@@ -8,8 +9,9 @@ router.route("/post")
 router.route("/login")
   .post(userController.login);
 
-router.route("/:email")
-  .get(userController.findByEmail);
+
+router.route("/me")
+  .get(authMiddleware, userController.getThisUser);
 
 
 router.route("/update/:email")
