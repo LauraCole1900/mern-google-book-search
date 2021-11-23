@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import { UserAPI } from "../../utils/api";
 import Auth from '../../utils/auth';
@@ -15,7 +15,7 @@ const Navigation = () => {
         if (!token) {
           return false;
         }
-        const response = await UserAPI.getUser(token);
+        const response = await UserAPI.getMe(token);
 
         if (!response.ok) {
           throw new Error('Something went wrong!');
@@ -30,8 +30,6 @@ const Navigation = () => {
     getUserInfo();
   }, []);
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
 
   return (
     <>
@@ -58,7 +56,7 @@ const Navigation = () => {
               Search Books
             </Link>
             {Auth.loggedIn()
-              ? <Link onClick={Auth.logout} className="navlink">
+              ? <Link to="/" onClick={Auth.logout} className="navlink">
                 Logout
               </Link>
               : <Link to="/login" className="navlink">

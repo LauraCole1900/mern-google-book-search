@@ -8,9 +8,26 @@ module.exports = {
     console.log("from userController create", req.body)
     const user = await db.User.create(req.body);
     if (!user) {
-      return res.status(400).json("Could not create account at this time.")
+      return res.status(400).json({ message: "Could not create account at this time." })
     }
     const token = signToken(user)
+    res.json({ token, user });
+  },
+
+  // POST user for login
+  login: async function (req, res) {
+    console.log("from userController login", req.body);
+    const user = await db.User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(400).json({ message: "Login failed" });
+    }
+    const correctPassword = await user.isCorrectPassword(req.body.password);
+    console.log({ correctPassword });
+    if (!correctPassword) {
+      return res.status(400).json({ message: "Login failed" });
+    }
+    const token = signToken(user);
+    console.log({ token }, { user });
     res.json({ token, user });
   },
 

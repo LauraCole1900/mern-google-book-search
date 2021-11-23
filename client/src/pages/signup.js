@@ -21,9 +21,7 @@ const SignupPage = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log("Signup submit", user);
-    // On button click, grab "user" data and send it to the database
-    // If successful, reroute to "/"
-    // Else throw error
+
     await UserAPI.createUser({ ...user })
       .then(res => {
         console.log("signup form res", res);

@@ -5,6 +5,8 @@ const userController = require("../controllers/userController.js");
 router.route("/post")
   .post(userController.create);
 
+router.route("/login")
+  .post(userController.login);
 
 router.route("/:email")
   .get(userController.findByEmail);

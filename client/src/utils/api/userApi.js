@@ -8,6 +8,12 @@ const UserAPI = {
     return axios.post("/api/user/post", formData)
   },
 
+  // POST user login
+  loginUser: function (formData) {
+    console.log("from API loginUser", formData)
+    return axios.post("/api/user/login", formData)
+  },
+
 
   // GET user by email
   findUserByEmail: function (email) {

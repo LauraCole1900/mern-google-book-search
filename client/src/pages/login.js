@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { UserAPI } from "../utils/api";
+import Auth from "../utils/auth";
 
 const LoginPage = () => {
   const [user, setUser] = useState({
     email: "",
     password: ""
-  })
+  });
+  const navigate = useNavigate();
 
   // Handles input changes to form fields
   const handleInputChange = (e) => {
@@ -15,8 +18,22 @@ const LoginPage = () => {
   };
 
   // Handles click on "submit" button
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Login submit", user);
 
+    try {
+      const response = await UserAPI.loginUser({ ...user });
+      console.log("login form response", response);
+      if (!response.err) {
+        const { token, user } = await response.data;
+        console.log(user);
+        Auth.login(token);
+        navigate("/");
+      }
+    } catch (err) {
+      console.log("login form submit err", err);
+    }
   }
 
   return (
