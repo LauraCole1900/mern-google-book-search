@@ -1,14 +1,17 @@
 const ObjectId = require("mongodb").ObjectId;
-const db = require("../models")
+const db = require("../models");
+const { signToken } = require("../utils/auth");
 
 module.exports = {
   // POST new user to database
-  create: function (req, res) {
-    console.log("from userController create", req.body.email)
-    db.User
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(500).json(err))
+  create: async function (req, res) {
+    console.log("from userController create", req.body)
+    const user = await db.User.create(req.body);
+    if (!user) {
+      return res.status(400).json("Could not create account at this time.")
+    }
+    const token = signToken(user)
+    res.json({ token, user });
   },
 
 

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { UserAPI } from "../utils/api";
 
 const SignupPage = () => {
   const [user, setUser] = useState({
     userName: "",
     email: "",
     password: ""
-  })
+  });
+  const navigate = useNavigate();
 
   // Handles input changes to form fields
   const handleInputChange = (e) => {
@@ -16,8 +18,21 @@ const SignupPage = () => {
   };
 
   // Handles click on "submit" button
-  const handleFormSubmit = () => {
-
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Signup submit", user);
+    // On button click, grab "user" data and send it to the database
+    // If successful, reroute to "/"
+    // Else throw error
+    await UserAPI.createUser({ ...user })
+      .then(res => {
+        console.log("signup form res", res);
+        if (!res.err) {
+          navigate("/login");
+        } else {
+          console.log("signup form submit err", res.err);
+        }
+      })
   }
 
   return (
