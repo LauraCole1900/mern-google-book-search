@@ -17,6 +17,10 @@
   margin: 1rem 0 0.5rem 0;
 }
 
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
 .smallText {
   font-size: 16px;
 }

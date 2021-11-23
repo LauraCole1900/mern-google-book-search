@@ -10,7 +10,7 @@ router.route("/:email")
   .get(userController.findByEmail);
 
 
-router.route("/update/:id")
+router.route("/update/:email")
   .put(userController.updateUser);
 
 

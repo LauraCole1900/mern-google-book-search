@@ -62,7 +62,7 @@ const Navigation = () => {
                 Logout
               </Link>
               : <Link to="/login" className="navlink">
-                Log In/Sign Up
+                Log In
               </Link>
             }
           </Navbar.Collapse>

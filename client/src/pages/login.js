@@ -35,7 +35,7 @@ const LoginPage = () => {
               <Card className="formCard">
 
                 <Card.Body>
-                  <Form.Group>
+                  <Form.Group className="formGroup">
                     <Row>
                       <Col sm={12}>
                         <Form.Label>Email:</Form.Label>
