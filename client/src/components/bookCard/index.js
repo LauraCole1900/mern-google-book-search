@@ -13,21 +13,23 @@ const BookCard = ({ thisBook }) => {
             <Col sm={3}>
               <Image src={thisBook.volumeInfo.imageLinks?.thumbnail || ''} />
             </Col>
-            <Col sm={8}>
+            <Col sm={7}>
               <h1>{thisBook.volumeInfo.title}</h1>
               {thisBook?.volumeInfo?.authors &&
                 <p>by {thisBook.volumeInfo.authors.join("; ")}</p>}
               <p>Click <a href={thisBook.volumeInfo.previewLink} target="_blank" rel="noreferrer">here</a> for more information</p>
             </Col>
             {Auth.loggedIn() &&
-              <Button
-                data-toggle="popover"
-                title="Save Book"
-                className="button gButton"
-                data-btnname="saveBook"
-                // onClick={saveBook}
-                type="button"
-              >Save Book</Button>}
+              <Col sm={2}>
+                <Button
+                  data-toggle="popover"
+                  title="Save Book"
+                  className="button gButton"
+                  data-btnname="saveBook"
+                  // onClick={saveBook}
+                  type="button"
+                >Save Book</Button>
+              </Col>}
           </Row>
         </Card.Header>
         <Card.Body>

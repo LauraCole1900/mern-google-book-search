@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Navbar, Nav } from "react-bootstrap";
 import { UserAPI } from "../../utils/api";
 import Auth from '../../utils/auth';
@@ -17,13 +17,10 @@ const Navigation = () => {
           return false;
         }
         const response = await UserAPI.getMe(token);
-        console.log(response);
-
         if (response.status !== 200) {
           throw new Error("Something went wrong");
         }
         const user = response.data;
-        console.log(user);
         setUserInfo(user);
       } catch (err) {
         console.error(err);

@@ -1,5 +1,6 @@
 :root {
   --red: #ff0000;
+  --white: #ffffff;
   --googleRed: #ea4335;
   --googleYellow: #fbbc05;
   --googleGreen: #2da94f;
@@ -33,5 +34,6 @@ body {
 
 .gButton {
   background-color: var(--googleBlue);
+  border: 1px solid var(--white);
   margin-top: 1rem;
 }
