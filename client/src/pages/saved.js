@@ -26,6 +26,7 @@ const SavedPage = () => {
           throw new Error("Something went wrong");
         }
         const user = response.data;
+        console.log({ user })
         setUserData(user);
       } catch (err) {
         console.error(err);
@@ -43,14 +44,14 @@ const SavedPage = () => {
             <h1><span className="gBlue">M</span><span className="gRed">y</span> <span className="gBlue">S</span><span className="gRed">a</span><span className="gYellow">v</span><span className="gBlue">e</span><span className="gGreen">d</span> <span className="gBlue">B</span><span className="gRed">o</span><span className="gYellow">o</span><span className="gGreen">k</span><span className="gRed">s</span></h1>
           </Col>
         </Row>
-        {/* {searchedBook &&
-          searchedBook.map((thisBook) => ( */}
-        <Row>
-          <Col sm={12}>
-            {/* <BookCard thisBook={thisBook} /> */}
-          </Col>
-        </Row>
-        {/* ))} */}
+        {userData.myBooks &&
+          userData.myBooks.map((book) => (
+            <Row>
+              <Col sm={12}>
+                <BookCard thisBook={book} />
+              </Col>
+            </Row>
+          ))}
       </Container>
     </>
   )

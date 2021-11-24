@@ -35,31 +35,6 @@ const BookCard = ({ thisBook }) => {
     }
   }
 
-  // const handleSaveBook = async (bookId) => {
-  //   // find the book in `searchedBooks` state by the matching id
-  //   const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-
-  //   // get token
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //   if (!token) {
-  //     return false;
-  //   }
-
-  //   try {
-  //     const response = await saveBook(bookToSave, token);
-
-  //     if (!response.ok) {
-  //       throw new Error('something went wrong!');
-  //     }
-
-  //     // if book successfully saves to user's account, save book id to state
-  //     setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
-
   const handleDeleteBook = () => {
 
   }
@@ -70,13 +45,25 @@ const BookCard = ({ thisBook }) => {
         <Card.Header className="bookTitle">
           <Row>
             <Col sm={3}>
-              <Image src={thisBook.volumeInfo.imageLinks?.thumbnail || ''} />
+              {urlWhere === "my_books"
+                ? <Image src={thisBook.image || ""} />
+                : <Image src={thisBook.volumeInfo.imageLinks?.thumbnail || ''} />}
             </Col>
             <Col sm={7}>
-              <h1>{thisBook.volumeInfo.title}</h1>
-              {thisBook?.volumeInfo?.authors &&
-                <p>by {thisBook.volumeInfo.authors.join("; ")}</p>}
-              <p>Click <a href={thisBook.volumeInfo.previewLink} target="_blank" rel="noreferrer">here</a> for more information</p>
+              {urlWhere === "my_books"
+                ? <h1>{thisBook.title}</h1>
+                : <h1>{thisBook.volumeInfo.title}</h1>}
+              {urlWhere === "my_books"
+                ? (thisBook.authors &&
+                  <>
+                    <p>by {thisBook.authors.join("; ")}</p>
+                    <p>Click <a href={thisBook.link} target="_blank" rel="noreferrer">here</a> for more information</p>
+                  </>)
+                : (thisBook?.volumeInfo?.authors &&
+                  <>
+                    <p>by {thisBook.volumeInfo.authors.join("; ")}</p>
+                    <p>Click <a href={thisBook.volumeInfo.previewLink} target="_blank" rel="noreferrer">here</a> for more information</p>
+                  </>)}
             </Col>
             {/* {Auth.loggedIn() &&
               urlWhere !== "my_books" &&
@@ -115,7 +102,9 @@ const BookCard = ({ thisBook }) => {
           </Row>
         </Card.Header>
         <Card.Body>
-          <p>{thisBook.volumeInfo.description}</p>
+          {urlWhere === "my_books"
+            ? <p>{thisBook.description}</p>
+            : <p>{thisBook.volumeInfo.description}</p>}
         </Card.Body>
       </Card>
     </>

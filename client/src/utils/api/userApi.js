@@ -37,21 +37,10 @@ const UserAPI = {
     });
   },
 
-  // export const saveBook = (bookData, token) => {
-  //   return fetch('/api/users', {
-  //     method: 'PUT',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       authorization: `Bearer ${token}`,
-  //     },
-  //     body: JSON.stringify(bookData),
-  //   });
-  // };
 
-
-  // DELETE user by ID
-  deleteUser: function (id) {
-    console.log("from API deleteUser", id);
+  // DELETE user's book
+  deleteBook: function (id) {
+    console.log("from API deleteBook", id);
     return axios.delete(`/api/user/delete/${id}`)
   }
 };
