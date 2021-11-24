@@ -15,7 +15,7 @@ const UserAPI = {
   },
 
 
-  // GET user by email
+  // GET user by token
   getMe: function (token) {
     console.log("from API getMe", token);
     return axios.get("/api/user/me", {
@@ -25,21 +25,28 @@ const UserAPI = {
     })
   },
 
-  // export const getMe = (token) => {
-  //   return fetch('/api/users/me', {
+
+  // UPDATE user's books
+  saveBook: function (book, token) {
+    console.log("from API saveBook", book, token);
+    return axios.put("/api/user/book", book, {
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`
+      }
+    });
+  },
+
+  // export const saveBook = (bookData, token) => {
+  //   return fetch('/api/users', {
+  //     method: 'PUT',
   //     headers: {
   //       'Content-Type': 'application/json',
   //       authorization: `Bearer ${token}`,
   //     },
+  //     body: JSON.stringify(bookData),
   //   });
   // };
-
-
-  // UPDATE user by email
-  updateUser: function (email, formData) {
-    console.log("from API updateUser", email, formData);
-    return axios.put(`/api/user/update/${email}`, formData)
-  },
 
 
   // DELETE user by ID

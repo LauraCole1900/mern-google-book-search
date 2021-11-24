@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
 import Auth from "../../utils/auth";
+import { UserAPI } from "../../utils/api";
 import saveIcon from "../../icons/save-icon.png";
 import deleteIcon from "../../icons/trash-can.png";
 import "./style.css";
@@ -10,9 +11,54 @@ const BookCard = ({ thisBook }) => {
   const urlArray = window.location.href.split("/")
   const urlWhere = urlArray[urlArray.length - 1]
 
-  const handleSaveBook = () => {
-
+  const handleSaveBook = async (book) => {
+    console.log(book);
+    const bookToSave = {
+      title: book.volumeInfo.title,
+      authors: book.volumeInfo.authors,
+      description: book.volumeInfo.description,
+      image: book.volumeInfo.imageLinks.thumbnail,
+      link: book.volumeInfo.previewLink,
+      bookId: book.id
+    }
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      return false;
+    }
+    try {
+      const response = await UserAPI.saveBook(JSON.stringify(bookToSave), token);
+      if (response.status !== 200) {
+        throw new Error("Book not saved")
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  // const handleSaveBook = async (bookId) => {
+  //   // find the book in `searchedBooks` state by the matching id
+  //   const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+
+  //   // get token
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  //   if (!token) {
+  //     return false;
+  //   }
+
+  //   try {
+  //     const response = await saveBook(bookToSave, token);
+
+  //     if (!response.ok) {
+  //       throw new Error('something went wrong!');
+  //     }
+
+  //     // if book successfully saves to user's account, save book id to state
+  //     setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   const handleDeleteBook = () => {
 
@@ -62,7 +108,7 @@ const BookCard = ({ thisBook }) => {
                     title="Save Book"
                     className="button iconButton"
                     data-btnname="saveBook"
-                    onClick={handleSaveBook}
+                    onClick={() => handleSaveBook(thisBook)}
                     type="button"
                   ><Image fluid src={saveIcon} className="icon" alt="Save" /></Button>
                 </Col>)}

@@ -45,14 +45,34 @@ module.exports = {
   },
 
 
-  // PUT user
-  updateUser: function (req, res) {
-    console.log("from userController updateUser", req.body)
-    db.User
-      .findOneAndUpdate({ email: req.body.email }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err))
+  // UPDATE user with added book
+  saveBook: async function (req, res) {
+    console.log("from userController saveBook", req.user, req.body)
+    const updatedUser = await db.User.findOneAndUpdate(
+      { _id: req.user._id },
+      {
+        $addToSet: {
+          myBooks: req.body
+        }
+      },
+      { new: true, runValidators: true });
+    return res.json(updatedUser);
   },
+
+  // async saveBook({ user, body }, res) {
+  //   console.log(user);
+  //   try {
+  //     const updatedUser = await User.findOneAndUpdate(
+  //       { _id: user._id },
+  //       { $addToSet: { savedBooks: body } },
+  //       { new: true, runValidators: true }
+  //     );
+  //     return res.json(updatedUser);
+  //   } catch (err) {
+  //     console.log(err);
+  //     return res.status(400).json(err);
+  //   }
+  // },
 
 
   // DELETE user

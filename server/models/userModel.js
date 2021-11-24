@@ -18,10 +18,7 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    myBookIds: [{
-      type: Schema.Types.ObjectId,
-      ref: books
-    }]
+    myBooks: [books]
   },
   {
     toJSON: {

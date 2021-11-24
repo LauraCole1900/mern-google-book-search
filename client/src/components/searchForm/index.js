@@ -39,7 +39,6 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
       .catch(err => {
         console.log(err)
       })
-    setBook("");
   }
 
 

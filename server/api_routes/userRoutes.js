@@ -14,8 +14,8 @@ router.route("/me")
   .get(authMiddleware, userController.getThisUser);
 
 
-router.route("/update/:email")
-  .put(userController.updateUser);
+router.route("/book")
+  .put(authMiddleware, userController.saveBook);
 
 
 router.route("/delete/:id")
