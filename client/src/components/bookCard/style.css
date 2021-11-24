@@ -21,3 +21,19 @@ img {
 .bookTitle {
   background: var(--googleGradient);
 }
+
+.icon {
+  width: 50px;
+  border: none
+}
+
+.iconButton {
+  background-color: var(--googleBlue);
+  border: 1px solid var(--white);
+  max-height: 75px;
+}
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
