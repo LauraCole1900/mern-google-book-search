@@ -83,7 +83,7 @@ const BookCard = ({ thisBook }) => {
                   <Button
                     data-toggle="popover"
                     title="Delete Book"
-                    className="button iconButton"
+                    className="button deleteButton"
                     data-btnname="deleteBook"
                     onClick={handleDeleteBook}
                     type="button"
@@ -93,7 +93,7 @@ const BookCard = ({ thisBook }) => {
                   <Button
                     data-toggle="popover"
                     title="Save Book"
-                    className="button iconButton"
+                    className="button saveButton"
                     data-btnname="saveBook"
                     onClick={() => handleSaveBook(thisBook)}
                     type="button"

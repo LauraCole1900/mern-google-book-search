@@ -5,8 +5,14 @@
   --googleYellow: #fbbc05;
   --googleGreen: #2da94f;
   --googleBlue: #4285f4;
-  --googleGradient: linear-gradient(to right, var(--googleRed), var(--googleYellow), var(--googleGreen), var(--googleBlue));
-  --headerFont: 'Inter', sans-serif;
+  --googleGradient: linear-gradient(
+    to right,
+    var(--googleRed),
+    var(--googleYellow),
+    var(--googleGreen),
+    var(--googleBlue)
+  );
+  --headerFont: "Inter", sans-serif;
 }
 
 .bookCard {
@@ -22,15 +28,21 @@ img {
   background: var(--googleGradient);
 }
 
-.icon {
-  width: 50px;
-  border: none
-}
-
-.iconButton {
-  background-color: var(--googleBlue);
+.deleteButton,
+.saveButton {
   border: 1px solid var(--white);
   max-height: 75px;
+}
+.deleteButton {
+  background-color: var(--googleRed);
+}
+.saveButton {
+  background-color: var(--googleBlue);
+}
+
+.icon {
+  width: 50px;
+  border: none;
 }
 
 .right {
