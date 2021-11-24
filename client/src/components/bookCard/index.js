@@ -10,11 +10,11 @@ const BookCard = ({ thisBook }) => {
   const urlArray = window.location.href.split("/")
   const urlWhere = urlArray[urlArray.length - 1]
 
-  const saveBook = () => {
+  const handleSaveBook = () => {
 
   }
 
-  const deleteBook = () => {
+  const handleDeleteBook = () => {
 
   }
 
@@ -52,7 +52,7 @@ const BookCard = ({ thisBook }) => {
                     title="Delete Book"
                     className="button iconButton"
                     data-btnname="deleteBook"
-                    onClick={deleteBook}
+                    onClick={handleDeleteBook}
                     type="button"
                   ><Image fluid src={deleteIcon} className="icon" alt="Save" /></Button>
                 </Col>
@@ -62,7 +62,7 @@ const BookCard = ({ thisBook }) => {
                     title="Save Book"
                     className="button iconButton"
                     data-btnname="saveBook"
-                    onClick={saveBook}
+                    onClick={handleSaveBook}
                     type="button"
                   ><Image fluid src={saveIcon} className="icon" alt="Save" /></Button>
                 </Col>)}
