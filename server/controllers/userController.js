@@ -33,10 +33,10 @@ module.exports = {
 
 
   // GET logged-in user
-  getThisUser: async function (req, res) {
-    console.log("from userController getThisUser", req.params)
-    const thisUser = db.User.findOne({
-      $or: [{ _id: req.user ? req.user._id : req.params.id }, { email: req.params.email }]
+  getThisUser: async function ({ user = null, params }, res) {
+    console.log("from userController getThisUser", user, params);
+    const thisUser = await db.User.findOne({
+      $or: [{ _id: user ? user._id : params.id }]
     })
     if (!thisUser) {
       return res.status(400).json({ message: "User not found" })

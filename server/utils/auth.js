@@ -13,7 +13,6 @@ module.exports = {
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
-      console.log("authMiddleware", token)
     }
 
     if (!token) {
@@ -28,7 +27,6 @@ module.exports = {
       console.log("Invalid token");
       return res.status(400).json({ message: "Invalid token" });
     }
-
     // send to next endpoint
     next();
   },

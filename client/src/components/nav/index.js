@@ -17,11 +17,12 @@ const Navigation = () => {
           return false;
         }
         const response = await UserAPI.getMe(token);
+        console.log(response);
 
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw new Error("Something went wrong");
         }
-        const user = await response.json();
+        const user = response.data;
         console.log(user);
         setUserInfo(user);
       } catch (err) {
