@@ -9,30 +9,35 @@ const SavedPage = () => {
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
   const userDataLength = Object.keys(userData).length;
+  let savedBooks = [];
 
   const returnToHome = () => {
     navigate("/");
   }
 
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-        if (!token) {
-          returnToHome();
-        }
-        const response = await UserAPI.getMe(token);
-        if (response.status !== 200) {
-          throw new Error("Something went wrong");
-        }
-        const user = response.data;
-        console.log({ user })
-        setUserData(user);
-      } catch (err) {
-        console.error(err);
+  const getUserData = async () => {
+    try {
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+      if (!token) {
+        returnToHome();
       }
-    };
+      const response = await UserAPI.getMe(token);
+      if (response.status !== 200) {
+        throw new Error("Something went wrong");
+      }
+      const user = response.data;
+      setUserData(user);
+      getBookIds(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
+  const getBookIds = async (user) => {
+    return savedBooks = user?.myBooks.map(book => book.bookId)
+  }
+
+  useEffect(() => {
     getUserData();
   }, [userDataLength]);
 
@@ -46,9 +51,9 @@ const SavedPage = () => {
         </Row>
         {userData.myBooks &&
           userData.myBooks.map((book) => (
-            <Row>
+            <Row key={book.bookId}>
               <Col sm={12}>
-                <BookCard thisBook={book} />
+                <BookCard thisBook={book} savedBooks={savedBooks} />
               </Col>
             </Row>
           ))}

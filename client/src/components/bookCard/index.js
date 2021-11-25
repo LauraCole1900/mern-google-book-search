@@ -6,8 +6,8 @@ import saveIcon from "../../icons/save-icon.png";
 import deleteIcon from "../../icons/trash-can.png";
 import "./style.css";
 
-const BookCard = ({ thisBook }) => {
-  // Breaks down the URL
+const BookCard = ({ savedBooks, thisBook }) => {
+  // Breaks down the URL to render buttons conditionally
   const urlArray = window.location.href.split("/")
   const urlWhere = urlArray[urlArray.length - 1]
 
@@ -39,6 +39,7 @@ const BookCard = ({ thisBook }) => {
 
   }
 
+
   return (
     <>
       <Card className="bookCard">
@@ -65,40 +66,30 @@ const BookCard = ({ thisBook }) => {
                     <p>Click <a href={thisBook.volumeInfo.previewLink} target="_blank" rel="noreferrer">here</a> for more information</p>
                   </>)}
             </Col>
-            {/* {Auth.loggedIn() &&
-              urlWhere !== "my_books" &&
+
+            {Auth.loggedIn() &&
+              urlWhere === "my_books" &&
+              <Col sm={2} className="right">
+                <Button
+                  data-toggle="popover"
+                  title="Delete Book"
+                  className="button deleteButton"
+                  data-btnname="deleteBook"
+                  onClick={handleDeleteBook}
+                  type="button"
+                ><Image fluid src={deleteIcon} className="icon" alt="Save" /></Button>
+              </Col>}
+            {Auth.loggedIn() && urlWhere !== "my_books" && !savedBooks.includes(thisBook.id) &&
               <Col sm={2} className="right">
                 <Button
                   data-toggle="popover"
                   title="Save Book"
-                  className="button iconButton"
+                  className="button saveButton"
                   data-btnname="saveBook"
-                  onClick={saveBook}
+                  onClick={() => handleSaveBook(thisBook)}
                   type="button"
                 ><Image fluid src={saveIcon} className="icon" alt="Save" /></Button>
-              </Col>} */}
-            {Auth.loggedIn() &&
-              (urlWhere === "my_books"
-                ? <Col sm={2} className="right">
-                  <Button
-                    data-toggle="popover"
-                    title="Delete Book"
-                    className="button deleteButton"
-                    data-btnname="deleteBook"
-                    onClick={handleDeleteBook}
-                    type="button"
-                  ><Image fluid src={deleteIcon} className="icon" alt="Save" /></Button>
-                </Col>
-                : <Col sm={2} className="right">
-                  <Button
-                    data-toggle="popover"
-                    title="Save Book"
-                    className="button saveButton"
-                    data-btnname="saveBook"
-                    onClick={() => handleSaveBook(thisBook)}
-                    type="button"
-                  ><Image fluid src={saveIcon} className="icon" alt="Save" /></Button>
-                </Col>)}
+              </Col>}
           </Row>
         </Card.Header>
         <Card.Body>

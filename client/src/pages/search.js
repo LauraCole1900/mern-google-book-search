@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { UserAPI } from "../utils/api";
+import Auth from "../utils/auth";
 import BookCard from "../components/bookCard";
 import SearchForm from "../components/searchForm";
 
@@ -8,6 +10,37 @@ const SearchPage = () => {
     title: ""
   });
   const [searchedBook, setSearchedBook] = useState();
+  const [userData, setUserData] = useState({});
+  const [savedBooks, setSavedBooks] = useState([]);
+  const userDataLength = Object.keys(userData).length;
+
+  const getUserData = async () => {
+    try {
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+      if (!token) {
+        return false
+      }
+      const response = await UserAPI.getMe(token);
+      if (response.status !== 200) {
+        throw new Error("Something went wrong");
+      }
+      const user = response.data;
+      console.log({ user })
+      setUserData(user);
+      getBookIds(user);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getBookIds = async (user) => {
+    const savedBookIds = user?.myBooks.map(book => book.bookId)
+    setSavedBooks(savedBookIds);
+  }
+
+  useEffect(() => {
+    getUserData();
+  }, [userDataLength]);
 
   return (
     <>
@@ -22,14 +55,13 @@ const SearchPage = () => {
             <SearchForm book={book} setBook={setBook} setSearchedBook={setSearchedBook} />
           </Col>
         </Row>
-        {searchedBook &&
-          searchedBook.map((thisBook) => (
-            <Row key={thisBook.id} >
-              <Col sm={12}>
-                <BookCard thisBook={thisBook} />
-              </Col>
-            </Row>
-          ))}
+        {searchedBook?.map((thisBook) => (
+          <Row key={thisBook.id} >
+            <Col sm={12}>
+              <BookCard thisBook={thisBook} savedBooks={savedBooks} />
+            </Col>
+          </Row>
+        ))}
       </Container>
     </>
   )

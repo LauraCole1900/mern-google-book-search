@@ -50,13 +50,13 @@ const Navigation = () => {
           <Nav className="navobj">
             <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggle" data-toggle="popover" title="Show Menu" />
             <Navbar.Collapse id="basic-navbar-nav" className="navobject">
+              <Link to="/" className="navlink">
+                Search Books
+              </Link>
               {Auth.loggedIn() &&
                 <Link to="/my_books" className="navlink">
                   My Books
                 </Link>}
-              <Link to="/" className="navlink">
-                Search Books
-              </Link>
               {Auth.loggedIn()
                 ? <Link to="/" onClick={Auth.logout} className="navlink">
                   Logout
