@@ -12,7 +12,6 @@ const BookCard = ({ savedBooks, thisBook }) => {
   const urlWhere = urlArray[urlArray.length - 1]
 
   const handleSaveBook = async (book) => {
-    console.log(book);
     const bookToSave = {
       title: book.volumeInfo.title,
       authors: book.volumeInfo.authors,
@@ -28,16 +27,50 @@ const BookCard = ({ savedBooks, thisBook }) => {
     try {
       const response = await UserAPI.saveBook(JSON.stringify(bookToSave), token);
       if (response.status !== 200) {
-        throw new Error("Book not saved")
+        throw new Error("Book not saved");
       }
     } catch (err) {
       console.log(err);
     }
   }
 
-  const handleDeleteBook = () => {
-
+  const handleDeleteBook = async (bookId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      return false;
+    }
+    try {
+      const response = await UserAPI.deleteBook(bookId, token);
+      if (response.status !== 200) {
+        throw new Error ("Book not deleted");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+  // const handleDeleteBook = async (bookId) => {
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  //   if (!token) {
+  //     return false;
+  //   }
+
+  //   try {
+  //     const response = await deleteBook(bookId, token);
+
+  //     if (!response.ok) {
+  //       throw new Error('something went wrong!');
+  //     }
+
+  //     const updatedUser = await response.json();
+  //     setUserData(updatedUser);
+  //     // upon success, remove book's id from localStorage
+  //     removeBookId(bookId);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
 
   return (
@@ -75,7 +108,7 @@ const BookCard = ({ savedBooks, thisBook }) => {
                   title="Delete Book"
                   className="button deleteButton"
                   data-btnname="deleteBook"
-                  onClick={handleDeleteBook}
+                  onClick={() => handleDeleteBook(thisBook.bookId)}
                   type="button"
                 ><Image fluid src={deleteIcon} className="icon" alt="Save" /></Button>
               </Col>}

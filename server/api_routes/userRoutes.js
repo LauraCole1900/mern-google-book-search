@@ -18,8 +18,8 @@ router.route("/book")
   .put(authMiddleware, userController.saveBook);
 
 
-router.route("/delete/:id")
-  .delete(userController.removeUser);
+router.route("/book/:id")
+  .delete(authMiddleware, userController.deleteBook);
 
   
 module.exports = router;

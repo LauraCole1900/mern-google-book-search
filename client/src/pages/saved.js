@@ -8,7 +8,7 @@ import BookCard from "../components/bookCard";
 const SavedPage = () => {
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
-  const userDataLength = Object.keys(userData).length;
+  const myBooksLength = userData?.myBooks?.length;
   let savedBooks = [];
 
   const returnToHome = () => {
@@ -39,9 +39,9 @@ const SavedPage = () => {
 
   useEffect(() => {
     getUserData();
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userDataLength]);
+  }, [myBooksLength]);
 
   return (
     <>

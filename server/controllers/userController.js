@@ -59,28 +59,29 @@ module.exports = {
     return res.json(updatedUser);
   },
 
-  // async saveBook({ user, body }, res) {
-  //   console.log(user);
-  //   try {
-  //     const updatedUser = await User.findOneAndUpdate(
-  //       { _id: user._id },
-  //       { $addToSet: { savedBooks: body } },
-  //       { new: true, runValidators: true }
-  //     );
-  //     return res.json(updatedUser);
-  //   } catch (err) {
-  //     console.log(err);
-  //     return res.status(400).json(err);
-  //   }
-  // },
 
-
-  // DELETE user
-  removeUser: function (req, res) {
-    db.User
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err))
+  // DELETE book
+  deleteBook: async function (req, res) {
+    console.log("from userController deleteBook", req.user, req.params);
+    const updatedUser = await db.User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $pull: { myBooks: { bookId: req.params.id }}},
+      { new: true});
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found "});
+      }
+      return res.json(updatedUser);
   }
+
+  // async deleteBook({ user, params }, res) {
+  //   const updatedUser = await User.findOneAndUpdate(
+  //     { _id: user._id },
+  //     { $pull: { savedBooks: { bookId: params.bookId } } },
+  //     { new: true }
+  //   );
+  //   if (!updatedUser) {
+  //     return res.status(404).json({ message: "Couldn't find user with this id!" });
+  //   }
+  //   return res.json(updatedUser);
+  // },
 }
