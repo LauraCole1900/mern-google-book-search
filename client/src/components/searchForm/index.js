@@ -60,7 +60,7 @@ const SearchForm = ({ book, setBook, searchedBook, setSearchedBook }) => {
                           type="input"
                           id="formTitle"
                           name="title"
-                          placeholder="War and Peace"
+                          placeholder="From the Mixed-Up Files of Mrs. Basil E. Frankweiler"
                           value={book?.title}
                           className="formInput"
                           onChange={handleInputChange}

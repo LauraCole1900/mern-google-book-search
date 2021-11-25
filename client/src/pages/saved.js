@@ -8,7 +8,7 @@ import BookCard from "../components/bookCard";
 const SavedPage = () => {
   const [userData, setUserData] = useState({});
   const navigate = useNavigate();
-  const myBooksLength = userData?.myBooks?.length;
+  const [renderTrigger, setRenderTrigger] = useState(false);
   let savedBooks = [];
 
   const returnToHome = () => {
@@ -41,7 +41,7 @@ const SavedPage = () => {
     getUserData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myBooksLength]);
+  }, [renderTrigger]);
 
   return (
     <>
@@ -55,7 +55,7 @@ const SavedPage = () => {
           userData.myBooks.map((book) => (
             <Row key={book.bookId}>
               <Col sm={12}>
-                <BookCard thisBook={book} savedBooks={savedBooks} />
+                <BookCard thisBook={book} savedBooks={savedBooks} renderTrigger={renderTrigger} setRenderTrigger={setRenderTrigger} />
               </Col>
             </Row>
           ))}

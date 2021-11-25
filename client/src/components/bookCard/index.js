@@ -6,7 +6,7 @@ import saveIcon from "../../icons/save-icon.png";
 import deleteIcon from "../../icons/trash-can.png";
 import "./style.css";
 
-const BookCard = ({ savedBooks, thisBook }) => {
+const BookCard = ({ savedBooks, thisBook, renderTrigger, setRenderTrigger }) => {
   // Breaks down the URL to render buttons conditionally
   const urlArray = window.location.href.split("/")
   const urlWhere = urlArray[urlArray.length - 1]
@@ -32,6 +32,7 @@ const BookCard = ({ savedBooks, thisBook }) => {
     } catch (err) {
       console.log(err);
     }
+    renderTrigger === false ? setRenderTrigger(true) : setRenderTrigger(false);
   }
 
   const handleDeleteBook = async (bookId) => {
@@ -47,30 +48,8 @@ const BookCard = ({ savedBooks, thisBook }) => {
     } catch (err) {
       console.log(err);
     }
+    renderTrigger === false ? setRenderTrigger(true) : setRenderTrigger(false);
   }
-
-  // const handleDeleteBook = async (bookId) => {
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //   if (!token) {
-  //     return false;
-  //   }
-
-  //   try {
-  //     const response = await deleteBook(bookId, token);
-
-  //     if (!response.ok) {
-  //       throw new Error('something went wrong!');
-  //     }
-
-  //     const updatedUser = await response.json();
-  //     setUserData(updatedUser);
-  //     // upon success, remove book's id from localStorage
-  //     removeBookId(bookId);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
 
   return (

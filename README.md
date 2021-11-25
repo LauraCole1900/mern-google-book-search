@@ -25,13 +25,22 @@ This application uses MongoDB, Express, React, and Node to create a book search 
 ## Screenshots
 
 Landing page:
-![Landing page:](assets/landing-page-screenshot.png)
+![Landing page:](assets/not-logged-in-search-page.png)
 
-Search form:
-![Search form](assets/search-form-screenshot.png)
+Sign-up page:
+![Sign-up page](assets/signup-page.png)
 
-Search results:
-![Search results](assets/search-results-screenshot.png)
+Login page:
+![Login page](assets/login-page.png)
+
+Search page with user logged in:
+![Search page logged in](assets/logged-in-search-page.png)
+
+Search results (truncated):
+![Search results](assets/search-page-with-results.png)
+
+Saved books page:
+![Saved books page](assets/saved-books-page.png)
 
 ## Installation Instructions
 
@@ -83,4 +92,4 @@ If you have further questions, you can reach me at lauracole1900@comcast.net. Fo
 
 ## Badges
 
-[![License badge](https://img.shields.io/badge/license-MIT-00008b)](./LICENSE) [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/LauraCole1900/mern-google-book-search)
+[![License badge](https://img.shields.io/badge/license-MIT-2da94f)](./LICENSE) [![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/LauraCole1900/mern-google-book-search)

@@ -12,7 +12,7 @@ const SearchPage = () => {
   const [searchedBook, setSearchedBook] = useState();
   const [userData, setUserData] = useState({});
   const [savedBooks, setSavedBooks] = useState([]);
-  const userDataLength = Object.keys(userData).length;
+  const [renderTrigger, setRenderTrigger] = useState(false);
 
   const getUserData = async () => {
     try {
@@ -25,7 +25,6 @@ const SearchPage = () => {
         throw new Error("Something went wrong");
       }
       const user = response.data;
-      console.log({ user })
       setUserData(user);
       getBookIds(user);
     } catch (err) {
@@ -42,7 +41,7 @@ const SearchPage = () => {
     getUserData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userDataLength]);
+  }, [renderTrigger]);
 
   return (
     <>
@@ -60,7 +59,7 @@ const SearchPage = () => {
         {searchedBook?.map((thisBook) => (
           <Row key={thisBook.id} >
             <Col sm={12}>
-              <BookCard thisBook={thisBook} savedBooks={savedBooks} />
+              <BookCard thisBook={thisBook} savedBooks={savedBooks} renderTrigger={renderTrigger} setRenderTrigger={setRenderTrigger} />
             </Col>
           </Row>
         ))}
