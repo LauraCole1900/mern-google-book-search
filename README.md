@@ -20,7 +20,7 @@ This application uses MongoDB, Express, React, and Node to create a book search 
 
 ## Links
 
-[Deployed application on Heroku](https://#.herokuapp.com) NOT DEPLOYED YET
+[Deployed application on Heroku](https://fabulous-googlebooks-searcher.herokuapp.com/)
 
 ## Screenshots
 

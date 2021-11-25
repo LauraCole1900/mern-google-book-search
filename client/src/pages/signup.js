@@ -20,11 +20,9 @@ const SignupPage = () => {
   // Handles click on "submit" button
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signup submit", user);
 
     await UserAPI.createUser({ ...user })
       .then(res => {
-        console.log("signup form res", res);
         if (!res.err) {
           navigate("/login");
         } else {

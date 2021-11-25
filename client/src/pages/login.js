@@ -20,14 +20,11 @@ const LoginPage = () => {
   // Handles click on "submit" button
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login submit", user);
 
     try {
       const response = await UserAPI.loginUser({ ...user });
-      console.log("login form response", response);
       if (!response.err) {
         const { token, user } = await response.data;
-        console.log(user);
         Auth.login(token);
         navigate("/");
       }
